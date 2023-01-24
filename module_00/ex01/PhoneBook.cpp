@@ -12,37 +12,32 @@
 
 # include "PhoneBook.hpp"
 # include "Colors.hpp"
+# include "Utils.hpp"
 
 PhoneBook::PhoneBook()
 {
     content = "";
 }
 
-void    PhoneBook::addContactInfo(Contact *elem)
+int    PhoneBook::addContactInfo(Contact *elem)
 {
-    std::string contactInfo[5] = {"First name", "Last name", "Nickname", "Phone number", "Darkest secret"};
+    std::string contactInfo[] = {"First name", "Last name", "Nickname", "Phone number", "Darkest secret"};
     int     i;
 
     i = -1;
-    std::cout << "| Adding new contact\n";
+	printMessage("| Adding new contact\n", PURPLES);
     while (++i < 5)
     {
         std::cout << "| - " << contactInfo[i] << "\n";
         std::getline(std::cin, content);
         if (content == "" || content == " " || content == "\n" || content == "\t" ||content == "\v" || content == "\f" || content == "\r")
         {   
-            std::cout << color::red << "Empty field. Fill the field!\n" << color::off;
-            break ;
+			printMessage("| Empty field. Fill the field!\n", REDN);
+            return (0);
         }
-        // else if (std::cin.eof())
-        // {
-        //     std::cout << "\n";
-        //     exit (0);
-        // }
-        else 
-            (*elem).addField(i, content);
+		(*elem).addField(i, content);
     }
-    std::cout << color::greenn << "| Contact Added\n" << color::off;
+	return (1);
 }
 
 void	PhoneBook::searchContact(Contact person[8], int index)
@@ -55,6 +50,7 @@ void	PhoneBook::searchContact(Contact person[8], int index)
 	if (index > 0)
 	{
 		i = 0;
+		printMessage("| Searching contact\n", PURPLES);
 		std::cout << "|" << std::setfill('-') << std::setw(52) << "|" << "\n";
 		std::cout << "| ";
 		std::cout << std::setfill(' ') << std::setw(10) << "Index" << " | ";
@@ -80,12 +76,8 @@ void	PhoneBook::searchContact(Contact person[8], int index)
             i++;
 		}
 		std::cout << "|" << std::setfill('-') << std::setw(52) << "|" << "\n";
-		std::cout << "| Enter index: ";
-		if ((std::cin >> i).eof())
-		{
-			std::cout << "\n";
-			exit (0);
-		}
+		printMessage("| Enter index to see contact info: ", WHITEN);
+		std::cin >> i;
 		if (std::cin.good() && i >= 0 && i <= index - 1)
 		{
 			j = 0;

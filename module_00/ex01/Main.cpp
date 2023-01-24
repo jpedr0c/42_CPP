@@ -12,6 +12,7 @@
 
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
+#include "Utils.hpp"
 #include "Colors.hpp"
 
 int main (int argc, char **argv)
@@ -19,7 +20,7 @@ int main (int argc, char **argv)
     (void)argv;
     if (argc > 1)
     {
-        std::cout << color::red << "Error in arguments\n" << color::off;
+        printMessage("Wrong amount of arguments!!\n", REDN);
         return (0);
     }
     Contact person[8];
@@ -28,14 +29,9 @@ int main (int argc, char **argv)
     int index;
 
     index = 0;
-    std::cout << color::bluen << "Welcome PhoneBook\n";
-    std::cout << "COMANDOS:\n";
-    std::cout << "=> ADD: add a new contact\n";
-    std::cout << "=> SEARCH:  display a specific contact\n";
-    std::cout << "=> EXIT: Exit the program\n" << color::off;
+    printStart();
     while (1)
     {
-
         std::cout << "> ";
         std::getline(std::cin, cmd);
         if (std::cin.eof())
@@ -45,15 +41,23 @@ int main (int argc, char **argv)
         }
         if (cmd == "ADD")
             if (index < 8)
-                newPhoneBook.addContactInfo(&person[index++]);
+            {
+                if (newPhoneBook.addContactInfo(&person[index]))
+                {
+                    printMessage("| Contact Added ✔️\n", GREENN);
+                    index++;
+                }
+                else
+                    printMessage("| Contact not added ❌\n", REDN);
+            }
             else
-                std::cout << "| No space left\n";
+                printMessage("| Phonebook is full ❌\n", REDN);
         else if (cmd == "SEARCH")
             newPhoneBook.searchContact(person, index);
         else if (cmd == "EXIT")
             break;
         else if (cmd.empty() == false)
-            std::cout << "Command not found `" << cmd << "`" << "\n";
+            printMessage("| Command not found `" + cmd + "`\n", REDN);
     }
     return (0);
 }

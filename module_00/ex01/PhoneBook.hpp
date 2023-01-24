@@ -22,10 +22,11 @@
 class PhoneBook
 {
 private:
+    Contact person[8];
     std::string content;
 public:
     PhoneBook();
-    void    addContactInfo(Contact *elem);
+    int    addContactInfo(Contact *elem);
     void    searchContact(Contact person[8], int i);
 };
 
