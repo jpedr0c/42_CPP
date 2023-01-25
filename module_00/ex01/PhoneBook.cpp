@@ -16,84 +16,94 @@
 
 PhoneBook::PhoneBook()
 {
-    content = "";
+	_current_index = 0;
+	_check_index = 0;
 }
 
-int    PhoneBook::addContactInfo(Contact *elem)
+void	PhoneBook::AddContact()
 {
-    std::string contactInfo[] = {"First name", "Last name", "Nickname", "Phone number", "Darkest secret"};
-    int     i;
+	std::cin.clear();
+	std::cin.ignore(10000, '\n');
+	std::cout << "Enter first name: ";
+	_contacts[_current_index].SetFirstName(ExtractInformation());
+	std::cout << "Enter last name: ";
+	_contacts[_current_index].SetLastName(ExtractInformation());
+	std::cout << "Enter nickname: ";
+	_contacts[_current_index].SetNickname(ExtractInformation());
+	std::cout << "Enter phone number: ";
+	_contacts[_current_index].SetPhoneNumber(ExtractInformation());
+	std::cout << "Enter dark secret: ";
+	_contacts[_current_index].SetDarkSecret(ExtractInformation());
 
-    i = -1;
-	printMessage("| Adding new contact\n", PURPLES);
-    while (++i < 5)
-    {
-        std::cout << "| - " << contactInfo[i] << "\n";
-        std::getline(std::cin, content);
-        if (content == "" || content == " " || content == "\n" || content == "\t" ||content == "\v" || content == "\f" || content == "\r")
-        {   
-			printMessage("| Empty field. Fill the field!\n", REDN);
-            return (0);
-        }
-		(*elem).addField(i, content);
-    }
-	return (1);
+	_current_index++;
+	if (_current_index == 8)
+		_current_index = 0;
+	if (_check_index < 8)
+		_check_index++;
+
 }
 
-void	PhoneBook::searchContact(Contact person[8], int index)
-{
-	int			i;
-	int			j;
-	std::string	elem;
-    std::string contactInfo[] = {"First name", "Last name", "Nickname", "Phone number", "Darkest secret"};
 
-	if (index > 0)
-	{
-		i = 0;
-		printMessage("| Searching contact\n", PURPLES);
-		std::cout << "|" << std::setfill('-') << std::setw(52) << "|" << "\n";
-		std::cout << "| ";
-		std::cout << std::setfill(' ') << std::setw(10) << "Index" << " | ";
-		std::cout << std::setfill(' ') << std::setw(10) << "First Name" << " | ";
-		std::cout << std::setfill(' ') << std::setw(10) << "Last name" << " | ";
-		std::cout << std::setfill(' ') << std::setw(10) << "Nickname" << " | " << "\n";
-		while (i < index)
-		{
-			j = 0;
-			std::cout << "| " << std::setfill(' ') << std::setw(10) << i << " | ";
-			while (j < 3)
-			{
-				elem = person[i].getField(j);
-				if (elem.size() > 10)
-				{
-					elem.resize(9);
-					elem += ".";
-				}
-				std::cout << std::setw(10) << elem << " | ";
-                j++;
-			}
-			std::cout << "\n";
-            i++;
+std::string PhoneBook::ExtractInformation() {
+	std::string information;
+	for (;;) {
+		std::getline(std::cin, information);
+		if (!information.empty()) {
+			return (information);
 		}
-		std::cout << "|" << std::setfill('-') << std::setw(52) << "|" << "\n";
-		printMessage("| Enter index to see contact info: ", WHITEN);
-		std::cin >> i;
-		if (std::cin.good() && i >= 0 && i <= index - 1)
-		{
-			j = 0;
-			while (j <= 4)
-            {
-				std::cout << "| - " << contactInfo[j] << ": " << person[i].getField(j) << "\n";
-                j++;
-            }
-		}
-		else
-		{
-			std::cin.clear();
-			std::cout << "| Invalid index" << "\n";
-		}
-		std::cin.ignore(10000, '\n');
+		std::cout << "Invalid input" << std::endl;
 	}
-	else
-		std::cout << "| No contacts" << "\n";
+}
+
+void	PhoneBook::GetContact() {
+	int	index;
+
+	std::cout << "|   INDEX  |";
+	std::cout << "|FIRST NAME|";
+	std::cout << "| LAST NAME|";
+	std::cout << "| NICKNAME |";
+	std::cout << std::endl;
+
+	for (int i = 0; i < _check_index; i++) {
+		std::cout << "|" << std::right << std::setw(10) << i + 1 << "|";
+		PrintInformationFormatted(_contacts[i].GetFirstName());
+		PrintInformationFormatted(_contacts[i].GetLastName());
+		PrintInformationFormatted(_contacts[i].GetNickname());
+		std::cout << std::endl;
+	}
+
+	std::cout << "Select a contact: ";
+	std::cin >> index;
+	PrintContactSelect(index);
+}
+
+void	PhoneBook::PrintInformationFormatted(std::string information) {
+	if (information.length() > 9) {
+		std::cout << "|" << std::right << std::setw(10) << information.substr(0, 9) + '.' << "|";
+	} else {
+		std::cout << std::right << std::setw(10) << information << "|";
+	}
+}
+
+void PhoneBook::PrintContactSelect(int index) {
+	for (;;) {
+		if (index < 1 || index > 8 || _check_index < index) {
+			if (_check_index == 0) {
+				std::cout << "No contacts" << std::endl;
+				break ;
+			}
+			std::cout << "Invalid input" << std::endl;
+			std::cout << "Select a contact: ";
+			std::cin >> index;
+			std::cin.clear();
+			std::cin.ignore(10000, '\n');
+		} else {
+			std::cout << _contacts[index - 1].GetFirstName() << std::endl;
+			std::cout << _contacts[index - 1].GetLastName() << std::endl;
+			std::cout << _contacts[index - 1].GetNickname() << std::endl;
+			std::cout << _contacts[index - 1].GetPhoneNumber() << std::endl;
+			std::cout << _contacts[index - 1].GetDarkSecret() << std::endl;
+			break ;
+		}
+	}
 }

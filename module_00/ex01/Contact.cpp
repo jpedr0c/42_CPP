@@ -14,60 +14,42 @@
 # include "PhoneBook.hpp"
 # include "Colors.hpp"
 
-Contact::Contact()
-{
-    firstName = "";
-    lastName = "";
-    nickname = "";
-    phoneNumber = "";
-    darkestSecret = "";
+std::string Contact::GetFirstName() {
+	return (_firstName);
 }
 
-void    Contact::addField(int field, std::string content)
-{
-    switch (field)
-    {
-    case 0:
-        firstName = content;
-        break;
-    case 1:
-        lastName = content;
-        break;
-    case 2:
-        nickname = content;
-        break;
-    case 3:
-        phoneNumber = content;
-        break;
-    case 4:
-        darkestSecret = content;
-        break;
-    default:
-        break;
-    }
+void Contact::SetFirstName(std::string firstName) {
+	_firstName = firstName;
 }
 
-std::string Contact::getField(int field)
-{
-    switch (field)
-    {
-    case 0:
-        return (firstName);
-        break;
-    case 1:
-        return (lastName);
-        break;
-    case 2:
-        return (nickname);
-        break;
-    case 3:
-        return (phoneNumber);
-        break;
-    case 4:
-        return (darkestSecret);
-        break;
-    default:
-        break;
-    }
-    return (NULL);
+std::string Contact::GetLastName() {
+	return (_lastName);
+}
+
+void Contact::SetLastName(std::string lastName) {
+	_lastName = lastName;
+}
+
+std::string Contact::GetNickname() {
+	return (_nickname);
+}
+
+void Contact::SetNickname(std::string nickname) {
+	_nickname = nickname;
+}
+
+std::string Contact::GetPhoneNumber() {
+	return (_phoneNumber);
+}
+
+void Contact::SetPhoneNumber(std::string phoneNumber) {
+	_phoneNumber = phoneNumber;
+}
+
+std::string Contact::GetDarkSecret() {
+	return (_darkSecret);
+}
+
+void Contact::SetDarkSecret(std::string darkSecret) {
+	_darkSecret = darkSecret;
 }

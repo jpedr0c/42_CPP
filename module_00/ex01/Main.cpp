@@ -15,7 +15,7 @@
 #include "Utils.hpp"
 #include "Colors.hpp"
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
     (void)argv;
     if (argc > 1)
@@ -23,41 +23,21 @@ int main (int argc, char **argv)
         printMessage("Wrong amount of arguments!!\n", REDN);
         return (0);
     }
-    Contact person[8];
-    PhoneBook newPhoneBook;
-    std::string cmd;
-    int index;
-
-    index = 0;
+	PhoneBook	phonebook;
+	std::string	cmd;
     printStart();
-    while (1)
+	while (1)
     {
-        std::cout << "> ";
-        std::getline(std::cin, cmd);
-        if (std::cin.eof())
-        {
-            std::cout << "\n";
-            return (0);
-        }
-        if (cmd == "ADD")
-            if (index < 8)
-            {
-                if (newPhoneBook.addContactInfo(&person[index]))
-                {
-                    printMessage("| Contact Added ✔️\n", GREENN);
-                    index++;
-                }
-                else
-                    printMessage("| Contact not added ❌\n", REDN);
-            }
-            else
-                printMessage("| Phonebook is full ❌\n", REDN);
+		printMessage("> ", WHITE);
+		std::cin >> cmd;
+		if (cmd == "ADD")
+			phonebook.AddContact();
         else if (cmd == "SEARCH")
-            newPhoneBook.searchContact(person, index);
+			phonebook.GetContact();
         else if (cmd == "EXIT")
-            break;
+			break ;
         else if (cmd.empty() == false)
             printMessage("| Command not found `" + cmd + "`\n", REDN);
-    }
+	}
     return (0);
 }
