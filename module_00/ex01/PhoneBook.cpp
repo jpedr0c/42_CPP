@@ -16,94 +16,114 @@
 
 PhoneBook::PhoneBook()
 {
-	_current_index = 0;
-	_check_index = 0;
+	currentIndex = 0;
+	checkIndex = 0;
 }
 
-void	PhoneBook::AddContact()
+void	PhoneBook::addContactInfo()
 {
-	std::cin.clear();
-	std::cin.ignore(10000, '\n');
-	std::cout << "Enter first name: ";
-	_contacts[_current_index].SetFirstName(ExtractInformation());
-	std::cout << "Enter last name: ";
-	_contacts[_current_index].SetLastName(ExtractInformation());
-	std::cout << "Enter nickname: ";
-	_contacts[_current_index].SetNickname(ExtractInformation());
-	std::cout << "Enter phone number: ";
-	_contacts[_current_index].SetPhoneNumber(ExtractInformation());
-	std::cout << "Enter dark secret: ";
-	_contacts[_current_index].SetDarkSecret(ExtractInformation());
+	printMessage("| Adding new contact\n", PURPLES);
+	std::cout << "| - Enter first name\n";
+	person[currentIndex].SetFirstName(extractInformation());
+	std::cout << "| - Enter last name\n";
+	person[currentIndex].SetLastName(extractInformation());
+	std::cout << "| - Enter nickname\n";
+	person[currentIndex].SetNickname(extractInformation());
+	std::cout << "| - Enter phone number\n";
+	person[currentIndex].SetPhoneNumber(extractInformation());
+	std::cout << "| - Enter dark secret\n";
+	person[currentIndex].SetDarkSecret(extractInformation());
 
-	_current_index++;
-	if (_current_index == 8)
-		_current_index = 0;
-	if (_check_index < 8)
-		_check_index++;
+	currentIndex++;
+	if (currentIndex == 8)
+		currentIndex = 0;
+	if (checkIndex < 8)
+		checkIndex++;
 
 }
 
 
-std::string PhoneBook::ExtractInformation() {
+// std::string PhoneBook::ExtractInformation()
+// {
+// 	std::string information;
+// 	std::getline(std::cin, information);
+// 	if (information == "" || information == " " || information == "\n" || information == "\t" || information == "\v" || information == "\f" || information == "\r")
+// 	{
+// 		printMessage("| Empty field. Fill the field!\n", REDN);
+// 		return (NULL);
+// 	}
+// 	return (information);
+// }
+
+std::string PhoneBook::extractInformation()
+{
 	std::string information;
 	for (;;) {
 		std::getline(std::cin, information);
 		if (!information.empty()) {
 			return (information);
 		}
-		std::cout << "Invalid input" << std::endl;
+		printMessage("| Empty field. Fill the field!\n", REDN);
 	}
 }
 
-void	PhoneBook::GetContact() {
+void	PhoneBook::printInfoFormatted(std::string elem)
+{
+	if (elem.size() > 10)
+	{
+		elem.resize(9);
+		elem += ".";
+	}
+	std::cout << std::setw(10) << elem << " | ";
+}
+
+void	PhoneBook::searchContact()
+{
 	int	index;
+	int i;
+	std::string elem;
 
-	std::cout << "|   INDEX  |";
-	std::cout << "|FIRST NAME|";
-	std::cout << "| LAST NAME|";
-	std::cout << "| NICKNAME |";
-	std::cout << std::endl;
+	if (checkIndex > 0)
+	{
+		i = 0;
+		printMessage("| Searching contact\n", PURPLES);
+		std::cout << "|" << std::setfill('-') << std::setw(52) << "|" << "\n";
+		std::cout << "| ";
+		std::cout << std::setfill(' ') << std::setw(10) << "Index" << " | ";
+		std::cout << std::setfill(' ') << std::setw(10) << "First Name" << " | ";
+		std::cout << std::setfill(' ') << std::setw(10) << "Last name" << " | ";
+		std::cout << std::setfill(' ') << std::setw(10) << "Nickname" << " | " << "\n";
 
-	for (int i = 0; i < _check_index; i++) {
-		std::cout << "|" << std::right << std::setw(10) << i + 1 << "|";
-		PrintInformationFormatted(_contacts[i].GetFirstName());
-		PrintInformationFormatted(_contacts[i].GetLastName());
-		PrintInformationFormatted(_contacts[i].GetNickname());
-		std::cout << std::endl;
-	}
-
-	std::cout << "Select a contact: ";
-	std::cin >> index;
-	PrintContactSelect(index);
-}
-
-void	PhoneBook::PrintInformationFormatted(std::string information) {
-	if (information.length() > 9) {
-		std::cout << "|" << std::right << std::setw(10) << information.substr(0, 9) + '.' << "|";
-	} else {
-		std::cout << std::right << std::setw(10) << information << "|";
-	}
-}
-
-void PhoneBook::PrintContactSelect(int index) {
-	for (;;) {
-		if (index < 1 || index > 8 || _check_index < index) {
-			if (_check_index == 0) {
-				std::cout << "No contacts" << std::endl;
-				break ;
-			}
-			std::cout << "Invalid input" << std::endl;
-			std::cout << "Select a contact: ";
-			std::cin >> index;
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
-		} else {
-			std::cout << _contacts[index - 1].GetFirstName() << std::endl;
-			std::cout << _contacts[index - 1].GetLastName() << std::endl;
-			std::cout << _contacts[index - 1].GetNickname() << std::endl;
-			std::cout << _contacts[index - 1].GetPhoneNumber() << std::endl;
-			std::cout << _contacts[index - 1].GetDarkSecret() << std::endl;
-			break ;
+		while (i < checkIndex)
+		{
+			std::cout << "| " << std::setfill(' ') << std::setw(10) << i << " | ";
+			elem = person[i].GetFirstName();
+			printInfoFormatted(elem);
+			elem = person[i].GetLastName();
+			printInfoFormatted(elem);
+			elem = person[i].GetNickname();
+			printInfoFormatted(elem);
+			std::cout << "\n";
+			i++;
 		}
+		std::cout << "|" << std::setfill('-') << std::setw(52) << "|" << "\n";
+		printMessage("| Enter index to see contact info: ", WHITEN);
+		std::cin >> index;
+		if (std::cin.good() && index >= 0 && index <= checkIndex - 1)
+		{
+			std::cout << "| - First name: " << person[index].GetFirstName() << "\n";
+			std::cout << "| - Last name: " << person[index].GetLastName() << "\n";
+			std::cout << "| - Nickname: " << person[index].GetNickname() << "\n";
+			std::cout << "| - Phone number: " << person[index].GetPhoneNumber() << "\n";
+			std::cout << "| - Darkest secret: " << person[index].GetDarkSecret() << "\n";
+		}
+		else
+		{
+			std::cin.clear();
+			printMessage("| Invalid index\n", REDN);
+		}
+		std::cin.ignore(10000, '\n');
 	}
+	else
+		std::cout << "| No contacts" << "\n";
 }

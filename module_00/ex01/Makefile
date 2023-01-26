@@ -42,6 +42,10 @@ fclean:		clean
 
 re:			fclean all
 
+valgrind: all
+	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all --error-limit=no --gen-suppressions=all --track-origins=yes  --log-file=project.log ./phoneBook 
+	cat project.log
+
 .PHONY:		all clean fclean re
 
 
@@ -102,6 +106,7 @@ re:			fclean all
 # 			@echo -e "\n$(BG_GREEN) => Cleaned and rebuilt everything <= $(SET_COLOR)"
 
 # valgrind: all
-# 	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all --error-limit=no --gen-suppressions=all --track-origins=yes  --log-file=project.log cat project.log
+# 	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all --error-limit=no --gen-suppressions=all --track-origins=yes --log-file=project.log ./phoneBook 
+#	cat project.log
 
 # .PHONY:	all start clean fclean re

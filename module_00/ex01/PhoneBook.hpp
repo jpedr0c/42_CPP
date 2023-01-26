@@ -14,23 +14,23 @@
 # define PHONEBOOK_HPP
 
 # include "Contact.hpp"
+// # include "Colors.hpp"
+// # include "Utils.hpp"
 # include <iostream>
 # include <string>
 # include <iomanip>
-
 class PhoneBook
 {
 	private:
-		Contact				_contacts[8];
-		int					_current_index;
-		int					_check_index;
+		Contact				person[8];
+		int					currentIndex;
+		int					checkIndex;
 	public:
 		PhoneBook();
-		void				AddContact();
-		void				GetContact();
-		std::string			ExtractInformation();
-		void				PrintInformationFormatted(std::string information);
-		void				PrintContactSelect(int index);
+		void				addContactInfo();
+		void				searchContact();
+		std::string			extractInformation();
+		void				printInfoFormatted(std::string elem);
 };
 
 #endif

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Contact.hpp"
 #include "PhoneBook.hpp"
 #include "Utils.hpp"
 #include "Colors.hpp"
@@ -23,19 +22,22 @@ int main(int argc, char **argv)
         printMessage("Wrong amount of arguments!!\n", REDN);
         return (0);
     }
-	PhoneBook	phonebook;
+	PhoneBook	newPhonebook;
 	std::string	cmd;
     printStart();
 	while (1)
     {
 		printMessage("> ", WHITE);
-		std::cin >> cmd;
+        std::getline(std::cin, cmd);
 		if (cmd == "ADD")
-			phonebook.AddContact();
+			newPhonebook.addContactInfo();
         else if (cmd == "SEARCH")
-			phonebook.GetContact();
+			newPhonebook.searchContact();
         else if (cmd == "EXIT")
+        {
+            printMessage("| Exiting...\n", PURPLE);
 			break ;
+        }
         else if (cmd.empty() == false)
             printMessage("| Command not found `" + cmd + "`\n", REDN);
 	}

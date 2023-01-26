@@ -11,45 +11,60 @@
 /* ************************************************************************** */
 
 # include "Contact.hpp"
-# include "PhoneBook.hpp"
-# include "Colors.hpp"
 
-std::string Contact::GetFirstName() {
+Contact::Contact()
+{
+}
+
+void Contact::setField(std::string field, std::string content)
+{
+	if (field == "first name")
+		_firstName = content;
+	else if (field == "last name")
+		_lastName = content;
+	else if (field == "nickname")
+		_nickname = content;
+	else if (field == "phone number")
+		_phoneNumber = content;
+	else if (field == "darkest secret")
+		_darkSecret = content;
+}
+
+std::string Contact::getField(std::string field)
+{
+	if (field == "first name")
+		return (_firstName);
+	else if (field == "last name")
+		return (_lastName);
+	else if (field == "nickname")
+		return (_nickname);
+	else if (field == "phone number")
+		return (_phoneNumber);
+	else if (field == "darkest secret")
+		return (_darkSecret);
+}
+
+std::string Contact::GetFirstName()
+{
 	return (_firstName);
 }
 
-void Contact::SetFirstName(std::string firstName) {
-	_firstName = firstName;
-}
-
-std::string Contact::GetLastName() {
+std::string Contact::GetLastName()
+{
 	return (_lastName);
 }
 
-void Contact::SetLastName(std::string lastName) {
-	_lastName = lastName;
-}
-
-std::string Contact::GetNickname() {
+std::string Contact::GetNickname()
+{
 	return (_nickname);
 }
 
-void Contact::SetNickname(std::string nickname) {
-	_nickname = nickname;
-}
-
-std::string Contact::GetPhoneNumber() {
+std::string Contact::GetPhoneNumber()
+{
 	return (_phoneNumber);
 }
 
-void Contact::SetPhoneNumber(std::string phoneNumber) {
-	_phoneNumber = phoneNumber;
-}
-
-std::string Contact::GetDarkSecret() {
+std::string Contact::GetDarkSecret()
+{
 	return (_darkSecret);
-}
-
-void Contact::SetDarkSecret(std::string darkSecret) {
-	_darkSecret = darkSecret;
 }
