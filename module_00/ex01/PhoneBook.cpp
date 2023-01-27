@@ -22,17 +22,39 @@ PhoneBook::PhoneBook()
 
 void	PhoneBook::addContactInfo()
 {
+	std::string content;
+
 	printMessage("| Adding new contact\n", PURPLES);
+
 	std::cout << "| - Enter first name\n";
-	person[currentIndex].SetFirstName(extractInformation());
+	std::getline(std::cin, content);
+	if (!verifyingField(content))
+		return ;
+	person[currentIndex].setField("first name", content);
+
 	std::cout << "| - Enter last name\n";
-	person[currentIndex].SetLastName(extractInformation());
+	std::getline(std::cin, content);
+	if (!verifyingField(content))
+		return ;
+	person[currentIndex].setField("last name", content);
+
 	std::cout << "| - Enter nickname\n";
-	person[currentIndex].SetNickname(extractInformation());
+	std::getline(std::cin, content);
+	if (!verifyingField(content))
+		return ;
+	person[currentIndex].setField("nickname", content);
+
 	std::cout << "| - Enter phone number\n";
-	person[currentIndex].SetPhoneNumber(extractInformation());
+	std::getline(std::cin, content);
+	if (!verifyingField(content))
+		return ;
+	person[currentIndex].setField("phone number", content);
+
 	std::cout << "| - Enter dark secret\n";
-	person[currentIndex].SetDarkSecret(extractInformation());
+	std::getline(std::cin, content);
+	if (!verifyingField(content))
+		return ;
+	person[currentIndex].setField("darkest secret", content);
 
 	currentIndex++;
 	if (currentIndex == 8)
@@ -40,31 +62,6 @@ void	PhoneBook::addContactInfo()
 	if (checkIndex < 8)
 		checkIndex++;
 
-}
-
-
-// std::string PhoneBook::ExtractInformation()
-// {
-// 	std::string information;
-// 	std::getline(std::cin, information);
-// 	if (information == "" || information == " " || information == "\n" || information == "\t" || information == "\v" || information == "\f" || information == "\r")
-// 	{
-// 		printMessage("| Empty field. Fill the field!\n", REDN);
-// 		return (NULL);
-// 	}
-// 	return (information);
-// }
-
-std::string PhoneBook::extractInformation()
-{
-	std::string information;
-	for (;;) {
-		std::getline(std::cin, information);
-		if (!information.empty()) {
-			return (information);
-		}
-		printMessage("| Empty field. Fill the field!\n", REDN);
-	}
 }
 
 void	PhoneBook::printInfoFormatted(std::string elem)
@@ -97,11 +94,11 @@ void	PhoneBook::searchContact()
 		while (i < checkIndex)
 		{
 			std::cout << "| " << std::setfill(' ') << std::setw(10) << i << " | ";
-			elem = person[i].GetFirstName();
+			elem = person[i].getField("first name");
 			printInfoFormatted(elem);
-			elem = person[i].GetLastName();
+			elem = person[i].getField("last name");
 			printInfoFormatted(elem);
-			elem = person[i].GetNickname();
+			elem = person[i].getField("nickname");
 			printInfoFormatted(elem);
 			std::cout << "\n";
 			i++;
@@ -111,11 +108,11 @@ void	PhoneBook::searchContact()
 		std::cin >> index;
 		if (std::cin.good() && index >= 0 && index <= checkIndex - 1)
 		{
-			std::cout << "| - First name: " << person[index].GetFirstName() << "\n";
-			std::cout << "| - Last name: " << person[index].GetLastName() << "\n";
-			std::cout << "| - Nickname: " << person[index].GetNickname() << "\n";
-			std::cout << "| - Phone number: " << person[index].GetPhoneNumber() << "\n";
-			std::cout << "| - Darkest secret: " << person[index].GetDarkSecret() << "\n";
+			std::cout << "| - First name: " << person[index].getField("first name") << "\n";
+			std::cout << "| - Last name: " << person[index].getField("last name") << "\n";
+			std::cout << "| - Nickname: " << person[index].getField("nickname") << "\n";
+			std::cout << "| - Phone number: " << person[index].getField("phone number") << "\n";
+			std::cout << "| - Darkest secret: " << person[index].getField("darkest secret") << "\n";
 		}
 		else
 		{

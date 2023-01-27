@@ -29,8 +29,8 @@ class PhoneBook
 		PhoneBook();
 		void				addContactInfo();
 		void				searchContact();
-		std::string			extractInformation();
 		void				printInfoFormatted(std::string elem);
+
 };
 
 #endif

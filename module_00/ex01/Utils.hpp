@@ -6,7 +6,7 @@
 /*   By: jocardos <jocardos@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:04:26 by jocardos          #+#    #+#             */
-/*   Updated: 2023/01/25 09:39:36 by jocardos         ###   ########.fr       */
+/*   Updated: 2023/01/27 01:33:28 by jocardos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@
 
 void    printStart();
 void    printMessage(std::string str, std::string color);
+int     verifyingField(std::string content);
+
 
 #endif
