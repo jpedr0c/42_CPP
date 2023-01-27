@@ -54,12 +54,15 @@ void	PhoneBook::addContactInfo()
 	std::getline(std::cin, tmpDarkestSecret);
 	if (!verifyingField(tmpDarkestSecret))
 		return ;
-
-	person[currentIndex].setField("first name", tmpFirstName);
-	person[currentIndex].setField("last name", tmpLastName);
-	person[currentIndex].setField("nickname", tmpNickname);
-	person[currentIndex].setField("phone number", tmpPhoneNumber);
-	person[currentIndex].setField("darkest secret", tmpDarkestSecret);
+	else
+	{
+		person[currentIndex].setField("first name", tmpFirstName);
+		person[currentIndex].setField("last name", tmpLastName);
+		person[currentIndex].setField("nickname", tmpNickname);
+		person[currentIndex].setField("phone number", tmpPhoneNumber);
+		person[currentIndex].setField("darkest secret", tmpDarkestSecret);
+	    printMessage("| Contact Added ✔️\n", GREENN);
+	}
 
 	currentIndex++;
 	if (currentIndex == 8)

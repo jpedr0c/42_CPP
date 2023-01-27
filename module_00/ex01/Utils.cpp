@@ -40,6 +40,7 @@ int verifyingField(std::string content)
         if (str[i] == '\0')
         {
             printMessage("| Empty field. Fill the field to add a contact!\n", REDN);
+            printMessage("| Contact not added ❌\n", REDN);
             return (0);
         }
         i++;
