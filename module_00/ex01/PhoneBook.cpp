@@ -22,39 +22,44 @@ PhoneBook::PhoneBook()
 
 void	PhoneBook::addContactInfo()
 {
-	std::string content;
+	std::string tmpFirstName;
+	std::string tmpLastName;
+	std::string tmpNickname;
+	std::string tmpPhoneNumber;
+	std::string tmpDarkestSecret;
 
 	printMessage("| Adding new contact\n", PURPLES);
 
 	std::cout << "| - Enter first name\n";
-	std::getline(std::cin, content);
-	if (!verifyingField(content))
+	std::getline(std::cin, tmpFirstName);
+	if (!verifyingField(tmpFirstName))
 		return ;
-	person[currentIndex].setField("first name", content);
 
 	std::cout << "| - Enter last name\n";
-	std::getline(std::cin, content);
-	if (!verifyingField(content))
+	std::getline(std::cin, tmpLastName);
+	if (!verifyingField(tmpLastName))
 		return ;
-	person[currentIndex].setField("last name", content);
 
 	std::cout << "| - Enter nickname\n";
-	std::getline(std::cin, content);
-	if (!verifyingField(content))
+	std::getline(std::cin, tmpNickname);
+	if (!verifyingField(tmpNickname))
 		return ;
-	person[currentIndex].setField("nickname", content);
 
 	std::cout << "| - Enter phone number\n";
-	std::getline(std::cin, content);
-	if (!verifyingField(content))
+	std::getline(std::cin, tmpPhoneNumber);
+	if (!verifyingField(tmpPhoneNumber))
 		return ;
-	person[currentIndex].setField("phone number", content);
 
 	std::cout << "| - Enter dark secret\n";
-	std::getline(std::cin, content);
-	if (!verifyingField(content))
+	std::getline(std::cin, tmpDarkestSecret);
+	if (!verifyingField(tmpDarkestSecret))
 		return ;
-	person[currentIndex].setField("darkest secret", content);
+
+	person[currentIndex].setField("first name", tmpFirstName);
+	person[currentIndex].setField("last name", tmpLastName);
+	person[currentIndex].setField("nickname", tmpNickname);
+	person[currentIndex].setField("phone number", tmpPhoneNumber);
+	person[currentIndex].setField("darkest secret", tmpDarkestSecret);
 
 	currentIndex++;
 	if (currentIndex == 8)

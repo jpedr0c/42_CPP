@@ -30,10 +30,19 @@ void    printStart()
 
 int verifyingField(std::string content)
 {
-	if (content == "" || content == " " || content == "\n" || content == "\t" || content == "\v" || content == "\f" || content == "\r")
-	{
-		printMessage("| Empty field. Fill the field to add a contact!\n", REDN);
-		return (0);
-	}
+    const char *str;
+    int i;
+
+    str = content.c_str();
+    i = 0;
+    while (std::isspace(str[i]) || str[i] == '\0')
+    {
+        if (str[i] == '\0')
+        {
+            printMessage("| Empty field. Fill the field to add a contact!\n", REDN);
+            return (0);
+        }
+        i++;
+    }
 	return (1);
 }

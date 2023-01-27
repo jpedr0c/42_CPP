@@ -19,6 +19,7 @@
 # include <iostream>
 # include <string>
 # include <iomanip>
+# include <cctype>
 
 void    printStart();
 void    printMessage(std::string str, std::string color);
