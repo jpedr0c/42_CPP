@@ -6,19 +6,18 @@
 #    By: jocardos <jocardos@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 11:57:33 by jocardos          #+#    #+#              #
-#    Updated: 2023/02/22 19:58:36 by jocardos         ###   ########.fr        #
+#    Updated: 2023/01/27 13:23:02 by jocardos         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC			=	Zombie \
-				zombieHorde	  \
-				main	  \
+SRC			=	Fixed \
+				main
 
 SRCS		= $(addsuffix .cpp, ${SRC})
 
 OBJS		= ${SRCS:.cpp=.o}
 
-NAME		= zombie
+NAME		= a.out
 
 CC			= c++
 RM			= rm -f
@@ -42,7 +41,7 @@ fclean:		clean
 re:			fclean all
 
 valgrind: all
-	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all --error-limit=no --gen-suppressions=all --track-origins=yes  --log-file=project.log ./zombie 
+	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all --error-limit=no --gen-suppressions=all --track-origins=yes  --log-file=project.log ./human 
 	cat project.log
 
 .PHONY:		all clean fclean re
