@@ -10,7 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC			=	ClapTrap \
+SRC			=	ScavTrap \
+				ClapTrap \
 				main
 
 SRCS		= $(addsuffix .cpp, ${SRC})
