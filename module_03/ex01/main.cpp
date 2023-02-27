@@ -16,15 +16,15 @@
 int main( void )
 {
 	ClapTrap *c1 = new ClapTrap();
-	ScavTrap *c2 = new ScavTrap("Zoro");
+	ScavTrap *c2 = new ScavTrap("Luffy");
 	ScavTrap *aux = new ScavTrap();
 	ScavTrap *c3 = new ScavTrap(*aux);
 
 	std::cout << std::endl;
 
-	c1->attack("Slime");
-	c2->attack("Sanji");
-	c3->attack("Slime shiny");
+	c1->attack("Buggy");
+	c2->attack("Arlong");
+	c3->attack("Crocodile");
 
 	std::cout << std::endl;
 
