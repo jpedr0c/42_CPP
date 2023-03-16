@@ -37,7 +37,7 @@ int main( void )
 
 	c1->beRepaired(1000);
 	c2->beRepaired(1);
-	c3->beRepaired(5);
+	c3->beRepaired(10);
 
 	std::cout << std::endl;
 

@@ -58,6 +58,11 @@ void    ClapTrap::attack(const std::string &target)
         std::cout << this->name << " ClapTrap can't attack because is dead\n";
         return ;
     }
+    if (this->energyPoints == 0)
+    {
+        std::cout << this->name << " ClapTrap can't attack because it's out of energy\n";
+        return ;
+    }
     std::cout << this->name << " ClapTrap attack " << target << " , causing " << this->attackDamage << " damage\n";
 }
 

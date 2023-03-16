@@ -6,7 +6,7 @@
 /*   By: jocardos <jocardos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 11:03:00 by jocardos          #+#    #+#             */
-/*   Updated: 2023/02/27 11:06:33 by jocardos         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:29:51 by jocardos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void    FragTrap::highFivesGuys()
 {
     if (this->hitPoints == 0)
     {
-        std::cout << this->name << "FragTrap can't hight fives because is dead\n";
+        std::cout << this->name << " FragTrap can't hight fives because is dead\n";
         return ;
     }
     std::cout << this->name << " FragTrap hight fives guys\n";
