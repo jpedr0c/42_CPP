@@ -6,7 +6,7 @@
 /*   By: jocardos <jocardos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 11:03:00 by jocardos          #+#    #+#             */
-/*   Updated: 2023/03/16 16:29:51 by jocardos         ###   ########.fr       */
+/*   Updated: 2023/04/04 12:53:40 by jocardos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ FragTrap::FragTrap()
 {
     this->name = "Default";
     this->hitPoints = 100;
-    this->energyPoints = 50;
-    this->attackDamage = 20;
+    this->energyPoints = 100;
+    this->attackDamage = 30;
 
     std::cout << this->name << " FragTrap created\n";
 }
@@ -26,8 +26,8 @@ FragTrap::FragTrap(std::string name)
 {
     this->name = name;
     this->hitPoints = 100;
-    this->energyPoints = 50;
-    this->attackDamage = 20;
+    this->energyPoints = 100;
+    this->attackDamage = 30;
 
     std::cout << this->name << " FragTrap created\n";
 }
