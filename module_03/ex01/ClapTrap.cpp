@@ -87,6 +87,12 @@ void    ClapTrap::beRepaired(unsigned int amount)
         std::cout << this->name << " ClapTrap can't be repaired because is dead\n";
         return ;
     }
+    if (this->energyPoints == 0)
+    {
+        std::cout << this->name << " ClapTrap can't repaired because it's out of energy\n";
+        return ;
+    }
     this->hitPoints += amount;
     std::cout << this->name << " ClapTrap has repaired " << amount << " hit points\n";
+    this->energyPoints--;
 }

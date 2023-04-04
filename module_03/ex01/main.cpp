@@ -28,7 +28,7 @@ int main( void )
 
 	std::cout << std::endl;
 
-	c1->takeDamage(80);
+	c1->takeDamage(20);
 	c2->takeDamage(50);
 	c2->takeDamage(50);
 	c3->takeDamage(5);
