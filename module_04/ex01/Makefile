@@ -14,7 +14,6 @@ SRC			=	Animal \
 				Brain \
 				Cat \
 				Dog \
-				Human \
 				main
 
 SRCS		= $(addsuffix .cpp, ${SRC})
