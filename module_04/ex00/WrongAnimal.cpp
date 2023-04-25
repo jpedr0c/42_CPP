@@ -16,21 +16,23 @@ WrongAnimal::WrongAnimal(){
     std::cout << "WrongAnimal default constructor called\n";
 }
 
-WrongAnimal::WrongAnimal(std::string type) : type(type){
+WrongAnimal::WrongAnimal(std::string type){
+    this->type = type;
     std::cout << "WrongAnimal parametric constructor called\n";
 }
 
-WrongAnimal::WrongAnimal(WrongAnimal const &src){
+WrongAnimal::WrongAnimal(WrongAnimal const& src){
     if (this != &src)
         *this = src;
+    std::cout << "WrongAnimal copy constructor called\n";
 }
 
-WrongAnimal &WrongAnimal::operator=(WrongAnimal const &src){
+WrongAnimal &WrongAnimal::operator=(WrongAnimal const& src){
     this->type = src.type;
     return (*this);
 }
 
-std::string const WrongAnimal::getType() const{
+const std::string WrongAnimal::getType() const{
     return (this->type);
 }
 
@@ -39,5 +41,5 @@ void WrongAnimal::makeSound() const{
 }
 
 WrongAnimal::~WrongAnimal(){
-    std::cout << "WrongAnimal default descructor called\n";
+    std::cout << "WrongAnimal default destructor called\n";
 }

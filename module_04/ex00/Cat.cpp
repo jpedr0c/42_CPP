@@ -13,14 +13,23 @@
 #include "Cat.hpp"
 #include <iostream>
 
-Cat::Cat(){
-    this->type = "Cat";
+Cat::Cat() : Animal("Cat"){
     std::cout << "Cat default constructor called\n";
 }
 
-Cat::Cat(const Cat& src){
-    *this = src;
+Cat::Cat(Cat const& src) : Animal("Cat"){
+    if (this != &src)
+        *this = src;
     std::cout << "Cat copy constructor called\n";
+}
+
+Cat Cat::operator=(Cat const& src){
+    this->type = src.type;
+    return (*this);
+}
+
+const std::string Cat::getType() const{
+    return (this->type);
 }
 
 void Cat::makeSound() const{

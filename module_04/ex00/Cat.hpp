@@ -18,9 +18,11 @@
 class Cat : public Animal{
     public:
         Cat();
-        Cat(const Cat& src);
+        Cat(Cat const& src);
+        Cat operator=(Cat const& src);
         ~Cat();
 
+        const std::string getType() const;
         void makeSound() const;
 };
 

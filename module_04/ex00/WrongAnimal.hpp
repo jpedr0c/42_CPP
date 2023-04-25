@@ -20,11 +20,11 @@ class WrongAnimal{
     public:
         WrongAnimal();
         WrongAnimal(std::string type);
-        WrongAnimal(WrongAnimal const &src);
-        WrongAnimal &operator=(WrongAnimal const &src);
+        WrongAnimal(WrongAnimal const& src);
+        WrongAnimal &operator=(WrongAnimal const& src);
         virtual ~WrongAnimal();
 
-        std::string const getType() const;
+        const std::string getType() const;
         void makeSound() const;
     protected:
         std::string type;

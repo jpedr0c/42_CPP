@@ -17,11 +17,11 @@
 class WrongCat : public WrongAnimal{
     public:
         WrongCat();
-        WrongCat(WrongCat const &src);
-        WrongCat operator=(WrongCat const &src);
+        WrongCat(WrongCat const& src);
+        WrongCat operator=(WrongCat const& src);
         ~WrongCat();
 
-        std::string const getType() const;
+        const std::string getType() const;
         void makeSound() const;
 };
 
