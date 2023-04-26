@@ -13,6 +13,8 @@
 #include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 
 int main(){
     const Animal* animals[4];
@@ -41,6 +43,9 @@ int main(){
 	const Dog* animal_1 = new Dog;
 	const Dog* animal_2 = new Dog(*animal_1);
 
+	std::cout << "\n========Test brain Animal_1=======\n";
+	std::cout << *animal_1->getBrain() << std::endl;
+
 	std::cout << "\n========Delete Animal_1===========\n";
 	delete animal_1;
 	
@@ -49,4 +54,13 @@ int main(){
 
 	std::cout << "\n========Delete Animal_2===========\n";
 	delete animal_2;
+
+	std::cout << "\n========== Test Wrong ==========\n\n";
+    const WrongAnimal* wrong_animal = new WrongAnimal();
+    const WrongAnimal* wrong_cat = new WrongCat();
+    std::cout << wrong_cat->getType() << " " << std::endl;
+    wrong_cat->makeSound();
+    wrong_animal->makeSound();
+    delete wrong_cat;
+    delete wrong_animal;
 }

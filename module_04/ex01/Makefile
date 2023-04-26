@@ -14,6 +14,8 @@ SRC			=	Animal \
 				Brain \
 				Cat \
 				Dog \
+				WrongAnimal \
+				WrongCat \
 				main
 
 SRCS		= $(addsuffix .cpp, ${SRC})

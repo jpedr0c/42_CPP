@@ -18,26 +18,26 @@
 
 int main()
 {
-    const Animal* meta = new Animal();
-    const Animal* j = new Dog();
-    const Animal* i = new Cat();
-    std::cout << j->getType() << " " << std::endl;
-    std::cout << i->getType() << " " << std::endl;
-    i->makeSound();
-    j->makeSound();
-    meta->makeSound();
-    delete i;
-    delete j;
-    delete meta;
+    const Animal* animal = new Animal();
+    const Animal* dog = new Dog();
+    const Animal* cat = new Cat();
+    std::cout << dog->getType() << " " << std::endl;
+    std::cout << cat->getType() << " " << std::endl;
+    dog->makeSound();
+    cat->makeSound();
+    animal->makeSound();
+    delete dog;
+    delete cat;
+    delete animal;
 
-	std::cout << "\n========== Tester WrongAnimal ==========\n\n";
-    const WrongAnimal* wrong_meta = new WrongAnimal();
-    const WrongAnimal* wrong_i = new WrongCat();
-    std::cout << wrong_i->getType() << " " << std::endl;
-    wrong_i->makeSound();
-    wrong_meta->makeSound();
-    delete wrong_i;
-    delete wrong_meta;
+	std::cout << "\n========== Test Wrong ==========\n\n";
+    const WrongAnimal* wrong_animal = new WrongAnimal();
+    const WrongAnimal* wrong_cat = new WrongCat();
+    std::cout << wrong_cat->getType() << " " << std::endl;
+    wrong_cat->makeSound();
+    wrong_animal->makeSound();
+    delete wrong_cat;
+    delete wrong_animal;
 
     return 0;
 }
