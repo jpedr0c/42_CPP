@@ -27,13 +27,13 @@ class Bureaucrat{
         int getGrade() const;
         void upgrade();
         void downgrade();
-        
-        class GradeTooHighException : public std::exception{
+
+        class gradeTooHighException : public std::exception{
             public:
                 const char* what() const throw();
         };
 
-        class GradeTooLowException : public std::exception{
+        class gradeTooLowException : public std::exception{
             public:
                 const char* what() const throw();
         };

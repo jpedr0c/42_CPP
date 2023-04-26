@@ -15,9 +15,9 @@
 void Bureaucrat::verifyException(int grade){
     try{
         if (grade < 1)
-            throw GradeTooHighException();
+            throw gradeTooHighException();
         else if (grade > 150)
-            throw GradeTooLowException();
+            throw gradeTooLowException();
     }
     catch (std::exception& e){
         std::cout << "Exception caught: " << e.what() << std::endl;
@@ -45,11 +45,11 @@ Bureaucrat &Bureaucrat::operator=(Bureaucrat const& src){
     return (*this);
 }
 
-const char* Bureaucrat::GradeTooHighException::what() const throw(){
+const char* Bureaucrat::gradeTooHighException::what() const throw(){
     return ("Grade value max is 1, grade value changed 1.");
 }
 
-const char* Bureaucrat::GradeTooLowException::what() const throw(){
+const char* Bureaucrat::gradeTooLowException::what() const throw(){
     return ("Grade value max is 150, grade value changed 150.");
 }
 
