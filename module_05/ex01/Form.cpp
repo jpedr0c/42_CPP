@@ -78,6 +78,6 @@ std::ostream& operator<<(std::ostream& out, Form const& src){
     return (out);
 }
 
-Form::~From(){
+Form::~Form(){
     std::cout << "Form default destructor called\n";
 }
