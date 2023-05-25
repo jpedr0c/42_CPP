@@ -18,7 +18,6 @@
 #include <string>
 
 class Bureaucrat;
-
 class AForm{
   public:
     AForm();
@@ -28,6 +27,7 @@ class AForm{
     ~AForm();
 
     void beSigned(Bureaucrat& src);
+    virtual void execute(Bureaucrat const& executor) const = 0;
     std::string getName() const;
     bool getSigned() const;
     const int getNecessaryNote() const;
@@ -37,6 +37,8 @@ class AForm{
     void setSigned(bool sig);
     void setNecessaryNote(const int necessaryNote);
     void setNecessaryNoteExec(const int necessaryNoteExec);
+
+    void setSigned(int sig);
 
     class gradeTooLowException : public std::exception{
       public:

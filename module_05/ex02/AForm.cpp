@@ -16,15 +16,14 @@ const char* AForm::gradeTooLowException::what() const throw(){
   return ("Grade very low, sorry!");
 }
 
-AForm::AForm(){
-  this->necessaryNote = 0;
-  this->necessaryNoteExec = 0;
+AForm::AForm(): necessaryNote(0), necessaryNoteExec(0){
+}
+
+AForm::AForm(std::string name, const int necessaryNote, const int necessaryNoteExec): name(name), necessaryNote(necessaryNote), necessaryNoteExec(necessaryNoteExec){
   std::cout << "AForm default constructor called\n";
 }
 
-AForm::AForm(AForm const& src){
-  this->necessaryNote = src.necessaryNote;
-  this->necessaryNoteExec = src.necessaryNoteExec;
+AForm::AForm(AForm const& src): necessaryNote(src.necessaryNote), necessaryNoteExec(src.necessaryNoteExec){
   std::cout << "AForm copy constructor called\n";
   *this = src;
 }

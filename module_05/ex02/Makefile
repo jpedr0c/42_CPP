@@ -10,8 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC			=	Bureaucrat \
-				Form \
+SRC			=	AForm \
+				Bureaucrat \
+				PresidentialPardonForm \
+				RobotomyRequestForm \
+				ShrubberyCreationForm \
 				main
 
 SRCS		= $(addsuffix .cpp, ${SRC})
