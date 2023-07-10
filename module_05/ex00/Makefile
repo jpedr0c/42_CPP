@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jocardos <jocardos@student.42.rio>         +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/23 11:57:33 by jocardos          #+#    #+#              #
-#    Updated: 2023/01/27 13:23:02 by jocardos         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 SRC			=	Bureaucrat \
 				main
 
@@ -20,7 +8,7 @@ OBJS		= ${SRCS:.cpp=.o}
 NAME		= a.out
 
 CC			= c++
-RM			= rm -f
+RM			= rm -rf
 
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 
@@ -37,11 +25,12 @@ clean:
 
 fclean:		clean
 			${RM} $(NAME)
+			${RM} project.log
 
 re:			fclean all
 
 valgrind: all
-	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all --error-limit=no --gen-suppressions=all --track-origins=yes  --log-file=project.log ./human 
+	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all --error-limit=no --gen-suppressions=all --track-origins=yes  --log-file=project.log ./a.out 
 	cat project.log
 
 .PHONY:		all clean fclean re
