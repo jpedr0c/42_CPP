@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jocardos <jocardos@student.42.rio>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/25 19:38:17 by jocardos          #+#    #+#             */
-/*   Updated: 2023/05/25 19:38:17 by jocardos         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
@@ -19,10 +7,10 @@ int main () {
 
     ShrubberyCreationForm shruberry("Shurumangos");
     RobotomyRequestForm roboto("Robotozinho");
-    PresidentialPardonForm zaphod("João");
+    PresidentialPardonForm zaphod("Igor");
 
     std::cout << "\n==== Testing Forms Failed ====\n" << std::endl;
-    Bureaucrat bureaucrat("Pedro", 150);
+    Bureaucrat bureaucrat("João", 150);
 
     shruberry.beSigned(bureaucrat);
     shruberry.execute(bureaucrat);

@@ -1,95 +1,89 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   AForm.cpp                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jocardos <jocardos@student.42.rio>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 20:48:07 by jocardos          #+#    #+#             */
-/*   Updated: 2023/05/23 20:48:07 by jocardos         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "AForm.hpp"
 
-const char* AForm::GradeTooLowException::what() const throw() {
-  return ("Grade very low, sorry!");
+char const* AForm::gradeTooLowException::what( void ) const throw() {
+    return ("Grade very low, sorry!");
 }
 
 AForm::AForm() : necessaryNote(0), necessaryNoteExec(0) {
 }
 
-AForm::AForm(std::string name, const int necessaryNote, const int necessaryNoteExec) : name(name), necessaryNote(necessaryNote), necessaryNoteExec(necessaryNoteExec) {
-  std::cout << "AForm default constructor called\n";
+AForm::AForm(std::string name, const int necessaryNote, const int necessaryNoteExec) : name(name), sig(0), necessaryNote(necessaryNote), necessaryNoteExec(necessaryNoteExec) {
+    std::cout << "AForm constructor called" << std::endl;
 }
 
 AForm::AForm(AForm const& src) : necessaryNote(src.necessaryNote), necessaryNoteExec(src.necessaryNoteExec) {
-  std::cout << "AForm copy constructor called\n";
-  *this = src;
+    std::cout << "AForm copy constructor called" << std::endl;
+    *this = src;
 }
 
-AForm& AForm::operator=(AForm const& src) {
-  this->name = src.getName();
-  this->sig = src.getSigned();
-  return (*this);
+AForm &AForm::operator=(AForm const& src) {
+    this->name = src.getName();
+    this->sig = src.getSigned();
+
+    return (*this);
 }
 
 std::string AForm::getName() const {
-  return (this->name);
+    return (this->name);
 }
 
 bool AForm::getSigned() const {
-  return (this->sig);
+    return (this->sig);
 }
 
-const int AForm::getNecessaryNote() const {
-  return (this->necessaryNote);
+int   AForm::getNecessaryNote() const {
+    return (this->necessaryNote);
 }
 
-const int AForm::getNecessaryNoteExec() const {
-  return (this->necessaryNoteExec);
+int   AForm::getNecessaryNoteExec() const {
+    return (this->necessaryNoteExec);
 }
 
-void AForm::beSigned(Bureaucrat& src) {
-  try {
-    if (src.getGrade() <= this->necessaryNote)
-      this->setSigned(1);
-    else
-      throw GradeTooLowException();
-  } catch (const std::exception& e) {
-    std::cout << e.what() << std::endl;
-  }
+void    AForm::beSigned(Bureaucrat& src) {
+    try {
+        if (src.getGrade() <= this->necessaryNote) {
+        this->setSigned(1);
+    }
+    else {
+        throw gradeTooLowException();
+    }
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << e.what() << '\n';
+    }
 }
 
-void AForm::setSigned(int sig) {
-  this->sig = (bool)sig;
+void    AForm::setSigned(int sig) {
+    this->sig = (bool)sig;
 }
 
-std::ostream& operator<<(std::ostream& out, AForm const& src) {
-  out << src.getName() << " ";
-  out << src.getSigned() << " ";
-  out << src.getNecessaryNote() << " ";
-  out << src.getNecessaryNoteExec() << " ";
+std::ostream&	operator<<(std::ostream& out, AForm const& src) {
+    out << src.getName() << " ";
+    out << src.getSigned() << " ";
+    out << src.getNecessaryNote() << " ";
+    out << src.getNecessaryNoteExec() << " ";
 
-  return (out);
+    return (out);
 }
 
-void AForm::setName(std::string name) {
-  this->name = name;
+void    AForm::setName( std::string name ) {
+    this->name = name;
 }
 
-void AForm::setSigned(bool sig) {
-  this->sig = sig;
+void    AForm::setSigned( bool sig ) {
+    this->sig = sig;
 }
 
-void AForm::setNecessaryNote(int necessaryNote) {
-  *const_cast<int*>(&this->necessaryNote) = necessaryNote;
+void    AForm::setNecessaryNote( int necessaryNote ) {
+    *const_cast<int*>(&this->necessaryNote) = necessaryNote;
 }
 
-void AForm::setNecessaryNoteExec(int necessaryNoteExec) {
-  *const_cast<int*>(&this->necessaryNoteExec) = necessaryNoteExec;
+void    AForm::setNecessaryNoteExec( int const necessaryNoteExec ) {
+    *const_cast<int*>(&this->necessaryNoteExec) = necessaryNoteExec;
 }
+
 
 AForm::~AForm() {
-  std::cout << "AForm default destructor called\n";
+    std::cout << "AForm destructor called" << std::endl;
 }

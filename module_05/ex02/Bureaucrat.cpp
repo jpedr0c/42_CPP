@@ -1,16 +1,37 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jocardos <jocardos@student.42.rio>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 20:51:25 by jocardos          #+#    #+#             */
-/*   Updated: 2023/05/23 20:51:25 by jocardos         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Bureaucrat.hpp"
+
+Bureaucrat::Bureaucrat(const std::string name, int grade) : name(name) {
+  std::cout << "Bureaucrat default constructor called\n";
+  this->grade = grade;
+  verifyException(this->grade);
+}
+
+Bureaucrat::Bureaucrat(Bureaucrat const& src) {
+  std::cout << "Bureaucrat copy constructor called\n";
+  *this = src;
+}
+
+Bureaucrat& Bureaucrat::operator=(Bureaucrat const& src) {
+  (std::string) this->name = src.getName();
+  this->grade = src.getGrade();
+  return (*this);
+}
+
+const std::string Bureaucrat::getName() const {
+  return this->name;
+}
+
+int Bureaucrat::getGrade() const {
+  return this->grade;
+}
+
+const char* Bureaucrat::GradeTooHighException::what() const throw() {
+  return ("Grade value max is 1, grade value changed 1.");
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw() {
+  return ("Grade value max is 150, grade value changed 150.");
+}
 
 void Bureaucrat::verifyException(int grade) {
   try {
@@ -27,65 +48,25 @@ void Bureaucrat::verifyException(int grade) {
   }
 }
 
-Bureaucrat::Bureaucrat(const std::string name, int grade) {
-  this->name = name
-                   std::cout
-               << "Bureaucrat default constructor called\n";
-  this->grade = grade;
-  verifyException(this->grade);
-}
-
-Bureaucrat::Bureaucrat(Bureaucrat const& src) {
-  std::cout << "Bureaucrat copy constructor called\n";
-  *this = src;
-}
-
-Bureaucrat& Bureaucrat::operator=(Bureaucrat const& src) {
-  (std::string) this->name = src.getName();
-  this->grade = src.getGrade();
-  return (*this);
-}
-
-const char* Bureaucrat::GradeTooHighException::what() const throw() {
-  return ("Grade value max is 1, grade value changed 1.");
-}
-
-const char* Bureaucrat::GradeTooLowException::what() const throw() {
-  return ("Grade value max is 150, grade value changed 150.");
-}
-
-const std::string Bureaucrat::getName() const {
-  return this->name;
-}
-
-int Bureaucrat::getGrade() const {
-  return this->grade;
-}
-
 void Bureaucrat::upgrade() {
-  this->grade = this->grade + 1;
-  verifyException(this->grade);
-}
-
-void Bureaucrat::downgrade() {
   this->grade = this->grade - 1;
   verifyException(this->grade);
 }
 
-void Bureaucrat::signForm(AForm& src) const {
-  if (src.getSigned() == 1)
-    std::cout << this->getName() << " signed " << src << std::endl;
-  else
-    std::cout << this->getName() << " couldn't sign " << src << "because low grade\n";
+void Bureaucrat::downgrade() {
+  this->grade = this->grade + 1;
+  verifyException(this->grade);
 }
 
-void Bureaucrat::executeForm(AForm const& form) {
-  if (form.getNecessaryNoteExec() >= this->grade) {
-    form.execute(*this)
-            std::cout
-        << *this << " executed " << form << std::endl;
-  } else
-    std::cout << *this << " not executed form. Low grade!";
+void	Bureaucrat::executeForm(AForm const& form) {
+	if (form.getNecessaryNoteExec() >= this->grade) {
+		form.execute(*this);
+
+		std::cout << *this << " executed " << form << std::endl;
+	}
+	else {
+		std::cout << *this << " not executed Form. Grade is low" << std::endl;
+	}
 }
 
 std::ostream& operator<<(std::ostream& ofs, Bureaucrat const& src) {
