@@ -25,20 +25,20 @@ int Bureaucrat::getGrade() const {
   return this->grade;
 }
 
-const char* Bureaucrat::gradeTooHighException::what() const throw() {
+const char* Bureaucrat::GradeTooHighException::what() const throw() {
   return ("Grade value max is 1, grade value changed 1.");
 }
 
-const char* Bureaucrat::gradeTooLowException::what() const throw() {
+const char* Bureaucrat::GradeTooLowException::what() const throw() {
   return ("Grade value max is 150, grade value changed 150.");
 }
 
 void Bureaucrat::verifyException(int grade) {
   try {
     if (grade < 1)
-      throw gradeTooHighException();
+      throw GradeTooHighException();
     else if (grade > 150)
-      throw gradeTooLowException();
+      throw GradeTooLowException();
   } catch (std::exception& e) {
     std::cout << "Exception caught: " << e.what() << std::endl;
     if (this->grade > 150)
