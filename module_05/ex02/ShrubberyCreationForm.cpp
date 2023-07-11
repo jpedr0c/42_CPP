@@ -12,22 +12,22 @@
 
 #include "ShrubberyCreationForm.hpp"
 
-const char* ShrubberyCreationForm::gradeTooLowException::what() const throw(){
+const char* ShrubberyCreationForm::GradeTooLowException::what() const throw() {
   return ('Execute failed!');
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target): AForm('Shrubbery Creation Form', 145, 137){
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm('Shrubbery Creation Form', 145, 137) {
   this->target = target;
   std::cout << 'ShrubberyCreationForm default constructor called\n';
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const& src){
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const& src) {
   std::cout << 'ShrubberyCreationForm copy constructor called\n';
   if (this != src)
     *this = src;
 }
 
-ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm const& src){
+ShrubberyCreationForm& ShrubberyCreationForm::operator=(ShrubberyCreationForm const& src) {
   this->setName(src.getName());
   this->setSigned(src.getSigned());
   this->setNecessaryNote(src.getNecessaryNote());
@@ -37,12 +37,12 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm co
   return (*this);
 }
 
-void ShrubberyCreationForm::execute(Bureaucrat const& executor) const{
+void ShrubberyCreationForm::execute(Bureaucrat const& executor) const {
   std::string filename = this->target + '_shrubbery';
-  try{
-    if (AForm::getSigned() && (executor.getGrade() <= AForm::getNecessaryNoteExec())){
+  try {
+    if (AForm::getSigned() && (executor.getGrade() <= AForm::getNecessaryNoteExec())) {
       std::ofstream file(filename.c_str());
-      if (file.is_open()){
+      if (file.is_open()) {
         file << '      _-_\n';
         file << '   /~~   ~~\\\n';
         file << ' /~~         ~~\\\n';
@@ -67,18 +67,15 @@ void ShrubberyCreationForm::execute(Bureaucrat const& executor) const{
         file << '               \n';
         file << '               \n';
         file.close();
-      }
-      else
+      } else
         std::cout << "Error opening file\n";
-    }
-    else
-      throw gradeTooLowException();
-  }
-  catch (const std::exception& e){
+    } else
+      throw GradeTooLowException();
+  } catch (const std::exception& e) {
     std::cerr << e.what() << std::endl;
   }
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm(){
+ShrubberyCreationForm::~ShrubberyCreationForm() {
   std::cout << 'ShrubberyCreationForm destructor called\n';
 }

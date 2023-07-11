@@ -12,22 +12,22 @@
 
 #include "PresidentialPardonForm.hpp"
 
-const char* PresidentialPardonForm::gradeTooLowException::what() const throw(){
+const char* PresidentialPardonForm::GradeTooLowException::what() const throw() {
   return ("Execute failed!");
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("Presidential Pardon Form", 25, 5){
+PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("Presidential Pardon Form", 25, 5) {
   this->target = target;
   std::cout << "PresidentialPardonForm default constructor called\n";
 }
 
-PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const& src){
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const& src) {
   std::cout << "PresidentialPardonForm copy constructor called\n";
   if (this != src)
-    *this = src;    
+    *this = src;
 }
 
-PresidentialPardonForm &PresidentialPardonForm::operator=(PresidentialPardonForm const& src){
+PresidentialPardonForm& PresidentialPardonForm::operator=(PresidentialPardonForm const& src) {
   this->setName(src.getName());
   this->setSigned(src.getSigned());
   this->setNecessaryNote(src.getNecessaryNote());
@@ -37,18 +37,19 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(PresidentialPardonForm
   return (*this);
 }
 
-void  PresidentialPardonForm::execute(Bureaucrat const* executor) const{
+void PresidentialPardonForm::execute(Bureaucrat const* executor) const {
   try {
-    if (AForm::getSigned()) && (executor.getGrade() <= AForm::getNecessaryNoteExec())
-      std::cout << this->target << " has been pardoned by Zaphod Beeblebrox\n";
+    if (AForm::getSigned())
+      &&(executor.getGrade() <= AForm::getNecessaryNoteExec())
+              std::cout
+          << this->target << " has been pardoned by Zaphod Beeblebrox\n";
     else
-      throw gradeTooLowException(); 
-  }
-  catch (const std::exception& e){
+      throw GradeTooLowException();
+  } catch (const std::exception& e) {
     std::cerr << e.what() << std::endl;
   }
 }
 
-PresidentialPardonForm::~PresidentialPardonForm(){
+PresidentialPardonForm::~PresidentialPardonForm() {
   std::cout << "PresidentialPardonForm default destructor called\n";
 }

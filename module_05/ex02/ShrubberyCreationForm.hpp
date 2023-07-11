@@ -13,23 +13,24 @@
 #ifndef SHRUBBERYCREATIONFORM_HPP
 #define SHRUBBERYCREATIONFORM_HPP
 
-#include "AForm.hpp"
 #include <fstream>
 
-class ShrubberyCreationForm : public AForm{
-  public:
-    ShrubberyCreationForm(std::string target);
-    ShrubberyCreationForm(ShrubberyCreationForm const& src);
-    ShrubberyCreationForm &operator=(ShrubberyCreationForm const& src);
-    ~ShrubberyCreationForm();
+#include "AForm.hpp"
 
-    void execute(Bureaucrat const& executor) const;
+class ShrubberyCreationForm : public AForm {
+ public:
+  ShrubberyCreationForm(std::string target);
+  ShrubberyCreationForm(ShrubberyCreationForm const& src);
+  ShrubberyCreationForm& operator=(ShrubberyCreationForm const& src);
+  ~ShrubberyCreationForm();
 
-    class gradeTooLowException : public std::exception{
-      public:
-        const char* what() const throw();
-    };
+  void execute(Bureaucrat const& executor) const;
 
-  private:
-    std::string target;
+  class GradeTooLowException : public std::exception {
+   public:
+    const char* what() const throw();
+  };
+
+ private:
+  std::string target;
 };
