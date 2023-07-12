@@ -7,18 +7,20 @@
 #include "Form.hpp"
 
 class Form;
-
 class Bureaucrat {
  public:
   Bureaucrat();
   Bureaucrat(const std::string name, int grade);
-  Bureaucrat(Bureaucrat const& src);
-  Bureaucrat& operator=(Bureaucrat const& src);
+  Bureaucrat(Bureaucrat const& other);
+  Bureaucrat& operator=(Bureaucrat const& other);
   ~Bureaucrat();
 
-  const std::string getName() const;
+  const std::string& getName() const;
   int getGrade() const;
-  void signForm(Form& src) const;
+  void verifyException(int grade);
+  void upgrade();
+  void downgrade();
+  void signForm(Form& form);
 
   class GradeTooHighException : public std::exception {
    public:
@@ -30,15 +32,11 @@ class Bureaucrat {
     const char* what() const throw();
   };
 
-  void verifyException(int grade);
-  void upgrade();
-  void downgrade();
-
  private:
   const std::string name;
   int grade;
 };
 
-std::ostream& operator<<(std::ostream& out, Bureaucrat const& src);
+std::ostream& operator<<(std::ostream& out, Bureaucrat const& instance);
 
 #endif

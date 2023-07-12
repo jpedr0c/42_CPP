@@ -1,44 +1,44 @@
 #ifndef FORM_HPP
-# define FORM_HPP
+#define FORM_HPP
 
 #include <ostream>
 #include <string>
+
 #include "Bureaucrat.hpp"
 
 class Bureaucrat;
 class Form {
-    public:
-        Form(std::string name, const int necessaryNote, const int necessaryNoteExec);
-        Form(Form const& src);
-        Form &operator=(Form const& src);
-        ~Form();
+ public:
+  Form();
+  Form(const std::string name, int necessaryNote, int necessaryNoteExec);
+  Form(Form const& other);
+  Form& operator=(Form const& other);
+  ~Form();
 
-        void    beSigned(Bureaucrat& src);
-    
-        std::string     getName() const;
-        bool            getSigned() const;
-        int       getNecessaryNote() const;
-        int       getNecessaryNoteExec() const;
+  const std::string& getName() const;
+  bool getSigned() const;
+  int getNecessaryNote() const;
+  int getNecessaryNoteExec() const;
+  void verifyException(int grade);
+  void beSigned(Bureaucrat& bureaucrat);
 
-        void            setSigned(int sig);
+  class GradeTooHighException : public std::exception {
+   public:
+    const char* what() const throw();
+  };
 
-        class gradeTooHighException : public std::exception {
-            public:
-                char const* what() const throw();
-        };
+  class GradeTooLowException : public std::exception {
+   public:
+    const char* what() const throw();
+  };
 
-        class gradeTooLowException : public std::exception {
-            public:
-                char const* what() const throw();
-        };
-
-    private:
-        std::string name;
-        bool        sig;
-        const int   necessaryNote;
-        const int   necessaryNoteExec;
+ private:
+  const std::string name;
+  bool sig;
+  const int necessaryNote;
+  const int necessaryNoteExec;
 };
 
-std::ostream&	operator<<(std::ostream& out, Form const& src);
+std::ostream& operator<<(std::ostream& out, Form const& instance);
 
 #endif
