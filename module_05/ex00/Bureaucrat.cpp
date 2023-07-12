@@ -2,20 +2,18 @@
 
 Bureaucrat::Bureaucrat() : name("default"), grade(0) {}
 
-Bureaucrat::Bureaucrat(const std::string name, int grade) : name(name) {
-  std::cout << "Bureaucrat default constructor called\n";
-  this->grade = grade;
+Bureaucrat::Bureaucrat(const std::string name, int grade) : name(name), grade(grade) {
   verifyException(this->grade);
+  std::cout << "Bureaucrat constructor called\n";
 }
 
-Bureaucrat::Bureaucrat(Bureaucrat const& src) {
+Bureaucrat::Bureaucrat(Bureaucrat const& other) : name(other.name) {
+  *this = other;
   std::cout << "Bureaucrat copy constructor called\n";
-  *this = src;
 }
 
-Bureaucrat& Bureaucrat::operator=(Bureaucrat const& src) {
-  (std::string) this->name = src.getName();
-  this->grade = src.getGrade();
+Bureaucrat& Bureaucrat::operator=(Bureaucrat const& other) {
+  this->grade = other.getGrade();
   return (*this);
 }
 
@@ -60,11 +58,11 @@ void Bureaucrat::downgrade() {
   verifyException(this->grade);
 }
 
-std::ostream& operator<<(std::ostream& ofs, Bureaucrat const& src) {
-  ofs << src.getName() << ", Bureaucrat grade " << src.getGrade();
+std::ostream& operator<<(std::ostream& ofs, Bureaucrat const& instance) {
+  ofs << instance.getName() << ", Bureaucrat grade " << instance.getGrade();
   return (ofs);
 }
 
 Bureaucrat::~Bureaucrat() {
-  std::cout << "Bureaucrat default destructor called\n";
+  std::cout << "Bureaucrat destructor called\n";
 }
