@@ -12,7 +12,7 @@ class Bureaucrat {
   Bureaucrat& operator=(Bureaucrat const& other);
   ~Bureaucrat();
 
-  const std::string getName() const;
+  const std::string& getName() const;
   int getGrade() const;
   void verifyException(int grade);
   void upgrade();
