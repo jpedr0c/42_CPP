@@ -1,23 +1,23 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(const std::string name, int grade) : name(name) {
-  std::cout << "Bureaucrat default constructor called\n";
-  this->grade = grade;
+Bureaucrat::Bureaucrat() : name("default"), grade(0) {}
+
+Bureaucrat::Bureaucrat(const std::string name, int grade) : name(name), grade(grade) {
   verifyException(this->grade);
+  std::cout << "Bureaucrat constructor called\n";
 }
 
-Bureaucrat::Bureaucrat(Bureaucrat const& src) {
+Bureaucrat::Bureaucrat(Bureaucrat const& other) : name(other.name) {
+  *this = other;
   std::cout << "Bureaucrat copy constructor called\n";
-  *this = src;
 }
 
-Bureaucrat& Bureaucrat::operator=(Bureaucrat const& src) {
-  (std::string) this->name = src.getName();
-  this->grade = src.getGrade();
+Bureaucrat& Bureaucrat::operator=(Bureaucrat const& other) {
+  this->grade = other.getGrade();
   return (*this);
 }
 
-const std::string Bureaucrat::getName() const {
+const std::string& Bureaucrat::getName() const {
   return this->name;
 }
 
@@ -58,22 +58,23 @@ void Bureaucrat::downgrade() {
   verifyException(this->grade);
 }
 
-void	Bureaucrat::executeForm(AForm const& form) {
-	if (form.getNecessaryNoteExec() >= this->grade) {
-		form.execute(*this);
-
-		std::cout << *this << " executed " << form << std::endl;
-	}
-	else {
-		std::cout << *this << " not executed Form. Grade is low" << std::endl;
-	}
+void Bureaucrat::signForm(AForm& aform) {
+  aform.beSigned(*this);
 }
 
-std::ostream& operator<<(std::ostream& ofs, Bureaucrat const& src) {
-  ofs << src.getName() << ", Bureaucrat grade " << src.getGrade();
+void Bureaucrat::executeForm(AForm const& aform) {
+  if (aform.getNecessaryNoteExec() >= this->grade) {
+    aform.execute(*this);
+    std::cout << *this << " executed " << aform << std::endl;
+  } else
+    std::cout << *this << " not executed form. Because: Grade is low.\n";
+}
+
+std::ostream& operator<<(std::ostream& ofs, Bureaucrat const& instance) {
+  ofs << instance.getName() << ", Bureaucrat grade " << instance.getGrade();
   return (ofs);
 }
 
 Bureaucrat::~Bureaucrat() {
-  std::cout << "Bureaucrat default destructor called\n";
+  std::cout << "Bureaucrat destructor called\n";
 }
