@@ -103,44 +103,27 @@ int main() {
   std::cout << std::endl;
 
   try {
-    zaphod->signForm(*rob);
-  } catch (std::exception& e) {
-    std::cout << e.what() << std::endl;
-  }
-
-  try {
-    prosser->signForm(*rob);
-  } catch (std::exception& e) {
-    std::cout << e.what() << std::endl;
-  }
-  std::cout << std::endl;
-  std::cout << *rob;
-
-  std::cout << std::endl;
-
-  // ShrubberyCreationForm
-  try {  // try to execute before sign
     rob->executeForm(*garden);
   } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
   }
-  try {  // try to sign with low level
+  try {
     zaphod->signForm(*garden);
   } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
   }
-  try {  // sign
+  try {
     prosser->signForm(*garden);
   } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
   }
-  std::cout << *garden << std::endl;  // display update info
-  try {                               // try to execute with low level
+  std::cout << *garden << std::endl;
+  try {
     prosser->executeForm(*garden);
   } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
   }
-  try {  // execute
+  try {
     rob->executeForm(*garden);
   } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
@@ -148,13 +131,12 @@ int main() {
 
   std::cout << std::endl;
 
-  // RobotomyRequestForm (execute main multiple times to check randomizer is working)
-  try {  // sign
+  try {
     arthur->signForm(*neighbor);
   } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
   }
-  try {  // execute
+  try {
     arthur->executeForm(*neighbor);
   } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
@@ -162,14 +144,13 @@ int main() {
 
   std::cout << std::endl;
 
-  // PresidentialPardonForm
-  try {  // sign
-    arthur->signForm(*rick);
+  try {
+    arthur->signForm(*dumble);
   } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
   }
-  try {  // execute
-    arthur->executeForm(*rick);
+  try {
+    arthur->executeForm(*dumble);
   } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
   }

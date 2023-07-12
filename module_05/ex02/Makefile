@@ -29,11 +29,12 @@ clean:
 
 fclean:		clean
 			${RM} $(NAME)
+			${RM} project.log
 
 re:			fclean all
 
 valgrind: all
-	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all --error-limit=no --gen-suppressions=all --track-origins=yes  --log-file=project.log ./human 
+	valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all --error-limit=no --gen-suppressions=all --track-origins=yes  --log-file=project.log ./a.out 
 	cat project.log
 
 .PHONY:		all clean fclean re
