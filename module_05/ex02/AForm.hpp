@@ -13,7 +13,7 @@ class AForm {
   AForm(const std::string name, int necessaryNote, int necessaryNoteExec);
   AForm(AForm const& other);
   AForm& operator=(AForm const& other);
-  ~AForm();
+  virtual ~AForm();
 
   const std::string& getName() const;
   bool getSigned() const;

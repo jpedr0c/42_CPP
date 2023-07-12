@@ -29,7 +29,7 @@ const char* PresidentialPardonForm::GradeTooLowException::what() const throw() {
 void PresidentialPardonForm::execute(Bureaucrat const& executor) const {
   try {
     if (AForm::getSigned() && (executor.getGrade() <= AForm::getNecessaryNoteExec()))
-      std::cout << this->target << " has been pardoned by Albus Dumbledore" << std::endl;
+      std::cout << this->target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
     else
       throw GradeTooLowException();
   } catch (const std::exception& e) {
